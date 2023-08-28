@@ -33,6 +33,20 @@ const Usuario = sequelize.define("usuario",
         contraseña: {
             type: DataTypes.STRING(50),
             allowNull: false,
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        },
+        deletedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
         }
     },
 );

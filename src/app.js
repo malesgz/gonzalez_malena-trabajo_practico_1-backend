@@ -1,17 +1,39 @@
-import Express from "express";
-import dotenv from "dotenv";
-import router from "./routes/controllers.routes.js";
-dotenv.config()
+// Imports
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const path = require('path');
+require('dotenv').config();
 
-const app = Express()
+// Se conecta la Base de Datos
+const { conectarDB } = require('./db');
 
-app.use(Express.json())
-app.use(Express.urlencoded({extended: true}))
+conectarDB()
 
-app.use("/api", router)
+const app = express();
+const port = process.env.PORT || 5050
 
-app.get("*", (req, res) => {
-    res.send("Error 404: Ruta no encontrada");
-});
+// Middlewares
+// TODO: Implementar middlewares
+app.use(cors());
+// app.use(helmet());
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
-export default app
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Routes
+app.use(require('./routes/reserva.routes'));
+
+
+// TODO: Si la petición no coincide con ninguna de las rutas declaradas, mostrar error 404
+app.use((req, res, next) => {
+    return res.status(404).render('404');
+
+})
+
+
+// Starting the server
+app.listen(port, () => console.log(`Server on http://localhost:${port}`));

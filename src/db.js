@@ -1,10 +1,27 @@
-import { Sequelize } from "sequelize";
-import dotenv from "dotenv";
-dotenv.config()
-const { DB_NAME, DB_USER, DB_HOST, DB_PASSWORD, DB_PORT, DB_DIALECT } = process.env;
+const { Sequelize, DataTypes } = require('sequelize');
 
-export const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
-    port: DB_PORT,
-    host: DB_HOST,
-    dialect: DB_DIALECT,
-});
+// Nueva instancia de conexión a BD
+const sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
+    {
+        host: process.env.DB_HOST,
+        dialect: process.env.DB_DIALECT /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
+    });
+
+
+const conectarDB = async () => {
+    try {
+        await sequelize.authenticate()
+        console.log('Base de datos Conectada');
+    } catch (error) {
+        console.log('ERROR AL CONECTAR DB: ', error);
+    }
+};
+
+module.exports = {
+    sequelize,
+    DataTypes,
+    conectarDB
+}
