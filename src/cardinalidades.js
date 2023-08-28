@@ -6,11 +6,11 @@ const app = require("./app.js")
 require("dotenv").config()
 const port = process.env.PORT;
 
-User.hasMany(Producto, { foreignKey: "id_Producto", as: "producto" });
-Post.belongsTo(Usuario, { foreignKey: "id_Usuario", as: "usuario" });
+Producto.hasMany(Producto, { foreignKey: "id_Producto", as: "producto" });
+Usuario.belongsTo(Usuario, { foreignKey: "id_Usuario", as: "usuario" });
 
-Post.hasMany(Comentario, { foreignKey: "id_Comentario", as: "comentario" });
-Comment.belongsTo(Producto, { foreignKey: "id_Producto", as: "producto" });
+Comentario.hasMany(Comentario, { foreignKey: "id_Comentario", as: "comentario" });
+Producto.belongsTo(Producto, { foreignKey: "id_Producto", as: "producto" });
 
 sequelize.models = {
   Comentario,

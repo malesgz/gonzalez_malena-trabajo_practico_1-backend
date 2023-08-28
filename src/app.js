@@ -8,11 +8,11 @@ require('dotenv').config();
 
 // Se conecta la Base de Datos
 const { conectarDB } = require('./db');
-
 conectarDB()
-
 const app = express();
 const port = process.env.PORT || 5050
+
+
 
 // Middlewares
 app.use(cors());
@@ -20,8 +20,9 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 // Routes
 app.use( "/", require("./routes/comentario.routes"));
@@ -31,12 +32,10 @@ app.use( "/", require("./routes/usuario.routes"));
 
 
 
-// TODO: Si la petición no coincide con ninguna de las rutas declaradas, mostrar error 404
+// Mostrar error 404
 app.use((req, res, next) => {
     return res.status(404).render('404');
-
 })
 
-
-// Starting the server
+// Inicialización del servidor en el puerto.
 app.listen(port, () => console.log(`Server on http://localhost:${port}`));

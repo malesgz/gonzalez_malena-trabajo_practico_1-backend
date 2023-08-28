@@ -3,14 +3,14 @@ const Comentario = require('../models/comentario');
 
   ComentarioCtrl.createComentario= async (req, res) => {
     try {
-      const { ComentarioId, descripcion } = req.body;
-      const Comentario = await Comentario.findByPk(ComentarioId);
+      const { id_Comentario, descripcion } = req.body;
+      const Comentario = await Comentario.findByPk(id_Comentario);
       if (!Comentario) {
         return res.status(404).json({ error: 'El comentario que busca no existe.' });
       }
       const nuevoComentario = await Comentario.create({
         descripcion,
-        ComentarioId: ComentarioId
+        id_Comentario: id_Comentario
       });
       res.status(201).json(nuevoComentario);
     } catch (error) {

@@ -10,7 +10,7 @@ UsuarioCtrl.createUsuario = async (req, res) => {
         },
       });
   
-      if (existeUser) {
+      if (existeUsuario) {
         throw {
           status: 400,
           message: "Este usuario existe en la BD",

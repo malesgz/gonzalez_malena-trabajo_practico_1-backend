@@ -48,6 +48,9 @@ const Usuario = sequelize.define("usuario",
             allowNull: true
         }
     },
+    {
+        tableName: "Usuario",
+    }
 );
 
 module.exports = Usuario;

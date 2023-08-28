@@ -63,9 +63,9 @@ const Producto = require('../models/Producto');
     try {
       const ProductoId = req.params.id;
       const Producto = await Producto.findByPk(postId, {
-        include: nombreUsurio // Incluye los datos del usuario asociado a la publicación
+        include: nombreUsurio
       });
-      if (!post) {
+      if (!Producto) {
         return res.status(404).json({ error: 'No se encontro el producto especificado.' });
       }
       res.status(200).json(post);

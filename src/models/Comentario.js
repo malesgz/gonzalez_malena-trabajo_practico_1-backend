@@ -30,6 +30,9 @@ const Comentario = sequelize.define("Comentario",
             allowNull: true
         }
     },
+    {
+        tableName: "Comentario",
+    }
 );
 
 module.exports = Comentario;
