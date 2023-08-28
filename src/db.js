@@ -1,27 +1,21 @@
-const { Sequelize, DataTypes } = require('sequelize');
+// Se importan las clases de la librería
+const { Sequelize, DataTypes, Model } = require("sequelize");
+require("dotenv").config();
 
-// Nueva instancia de conexión a BD
-const Sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    {
-        host: process.env.DB_HOST,
-        dialect: process.env.DB_DIALECT /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
-    });
+// Se crea una instancia de la conexión a la base de datos
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST, // localhost
+    dialect: process.env.DB_DIALECT, // 'mysql' | 'mariadb' | 'postgres' | 'mssql'
+  }
+);
 
-
-const conectarDB = async () => {
-    try {
-        await Sequelize.authenticate()
-        console.log('La base de datos se encuentra conectada');
-    } catch (error) {
-        console.log('ERROR AL CONECTAR DB: ', error);
-    }
-};
-
+// Se exporta la conexión a MySQL, Model y DataTypes para poder usarlas en los modelos
 module.exports = {
-    Sequelize,
-    DataTypes,
-    Model,
-}
+  sequelize,
+  DataTypes,
+  Model,
+};
