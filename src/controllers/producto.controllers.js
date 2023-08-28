@@ -1,8 +1,7 @@
-const { default: Producto } = require('../models/Producto');
+const ProductoCtrl = {};
 const Producto = require('../models/Producto');
-const ctrl = {};
 
-  PostrCtr.createProducto = async (req, res) => {
+  ProductoCtrl.createProducto = async (req, res) => {
     const { categoria, nombre, precio } = req.body;
     try {
         const existeProducto = await Producto.findOne({
@@ -16,7 +15,7 @@ const ctrl = {};
                 message: "Este producto ya existe",
             };
         }
-      const nuevoProducto = new Producto({
+      const nuevoProducto = nuevoProducto({
         categoria,
         nombre,
         precio
@@ -37,9 +36,9 @@ const ctrl = {};
   
 
   //Traer todos los productos en una lista.
-  PostrCtr.getProducto = async (req, res) => {
+  ProductoCtrl.getProducto = async (req, res) => {
     try {
-      const producto = await Producto.findAll({
+      const Producto = await Producto.findAll({
         include: usuario,
         order: [['createdAt', 'ASC']]
       });
@@ -60,7 +59,7 @@ const ctrl = {};
 
 
   //Traer un solo producto.
-  PostrCtr.getProductoById = async (req, res) => {
+  ProductoCtrl.getProductoById = async (req, res) => {
     try {
       const ProductoId = req.params.id;
       const Producto = await Producto.findByPk(postId, {
@@ -77,7 +76,7 @@ const ctrl = {};
 
 
   //EDITAR POST
-  PostrCtr.updatePost = async (req, res) => {
+  ProductoCtrl.updateProducto = async (req, res) => {
     try {
       const postId = req.params.id;
       const { title, content , fecha_creacion } = req.body;
@@ -87,10 +86,10 @@ const ctrl = {};
         return res.status(404).json({ error: 'Post no Encontrado' });
       }
 
-      await post.update({ title, content , fecha_creacion  });
+      await Producto.update({ title, content , fecha_creacion  });
       res.status(200).json({
         message: 'Post editado correctamente',
-        updatedPost})
+        updatedProducto})
 
     } catch (error) {
       res.status(500).json({ error: 'Error al Editar el  post' });
@@ -98,10 +97,10 @@ const ctrl = {};
   }
 
   //ELIMINAR POST
-  PostrCtr.deletePost = async (req, res) => {
+  ProductoCtrl.deleteProducto = async (req, res) => {
     try {
-      const postId = req.params.id;
-      const post = await Post.findByPk(postId);
+      const productoId = req.params.id;
+      const producto = await Producto.findByPk(postId);
       if (!post) {
         return res.status(404).json({ error: 'Post not encontrado' });
       }
@@ -114,4 +113,4 @@ const ctrl = {};
 };
 
 
-module.exports = PostrCtr;
+module.exports = ProductoCtrl;

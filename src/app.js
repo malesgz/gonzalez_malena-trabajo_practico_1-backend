@@ -25,7 +25,10 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.use(require('./routes/reserva.routes'));
+app.use(require('./routes/comentario.routes'));
+app.use(require('./routes/producto.routes'));
+app.use(require('./routes/usuario.routes'));
+
 
 
 // TODO: Si la petición no coincide con ninguna de las rutas declaradas, mostrar error 404

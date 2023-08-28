@@ -1,5 +1,4 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../db.js";
+const {DataTypes, sequelize } = require("../db");
 
 const Comentario = sequelize.define("comentario",
     {
@@ -33,4 +32,4 @@ const Comentario = sequelize.define("comentario",
     },
 );
 
-export default Comentario;
+module.exports = Comentario;

@@ -1,17 +1,16 @@
-const comentarioCtr = {};
-const { default: comentario } = require('../models/comentario');
-const comentario  = require('../models/comentario');
+const ComentarioCtrl = {};
+const Comentario = require('../models/comentario');
 
-  comentarioCtr.createComentario= async (req, res) => {
+  ComentarioCtrl.createComentario= async (req, res) => {
     try {
-      const { postId, text } = req.body;
-      const post = await Comentario.findByPk(ComentarioId);
+      const { ComentarioId, descripcion } = req.body;
+      const Comentario = await Comentario.findByPk(ComentarioId);
       if (!Comentario) {
         return res.status(404).json({ error: 'El comentario que busca no existe.' });
       }
       const nuevoComentario = await Comentario.create({
         descripcion,
-        ComentarioId: comentarioId
+        ComentarioId: ComentarioId
       });
       res.status(201).json(nuevoComentario);
     } catch (error) {
@@ -19,4 +18,4 @@ const comentario  = require('../models/comentario');
     }
   }
 
-module.exports = comentarioCtr;
+module.exports = ComentarioCtrl;
