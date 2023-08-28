@@ -1,8 +1,8 @@
 const {DataTypes, sequelize } = require("../db");
 
-const Comentario = sequelize.define("comentario",
+const Comentario = sequelize.define("Comentario",
     {
-        id: {
+        id_Comentario: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,

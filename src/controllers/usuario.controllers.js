@@ -1,7 +1,7 @@
 const Usuario = require('../models/Usuario.js');
-const ctrl = {};
+const UsuarioCtrl = {};
 
-userCtr.createUsuario = async (req, res) => {
+UsuarioCtrl.createUsuario = async (req, res) => {
     const { nombreUsuario, fechaNacimiento, nombre, apellido, correoElectronico, constraseña } = req.body;
       try {
       const existeUsuario = await Usuario.findOne({
@@ -31,4 +31,4 @@ userCtr.createUsuario = async (req, res) => {
       }
   };
   
-  module.exports = userCtr;
+  module.exports = UsuarioCtrl;

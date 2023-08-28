@@ -15,7 +15,6 @@ const app = express();
 const port = process.env.PORT || 5050
 
 // Middlewares
-// TODO: Implementar middlewares
 app.use(cors());
 // app.use(helmet());
 app.use(morgan('dev'));
@@ -25,9 +24,10 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.use(require('./routes/comentario.routes'));
-app.use(require('./routes/producto.routes'));
-app.use(require('./routes/usuario.routes'));
+app.use( "/", require("./routes/comentario.routes"));
+app.use("/", require("./routes/producto.routes"));
+app.use( "/", require("./routes/usuario.routes"));
+
 
 
 
