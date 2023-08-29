@@ -4,8 +4,8 @@ const Comentario = sequelize.define("Comentario",
     {
         id_Comentario: {
             type: DataTypes.INTEGER,
-            autoIncrement: true,
             primaryKey: true,
+            autoIncrement: true,
             unique: true,
             allowNull: false,
         },
@@ -34,5 +34,7 @@ const Comentario = sequelize.define("Comentario",
         tableName: "Comentario",
     }
 );
+
+Comentario.sync();
 
 module.exports = Comentario;

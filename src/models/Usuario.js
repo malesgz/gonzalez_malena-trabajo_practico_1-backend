@@ -4,8 +4,8 @@ const Usuario = sequelize.define("Usuario",
     {
         id_Usuario: {
             type: DataTypes.INTEGER,
-            autoIncrement: true,
             primaryKey: true,
+            autoIncrement: true,
             unique: true,
             allowNull: false,
         },
@@ -52,5 +52,7 @@ const Usuario = sequelize.define("Usuario",
         tableName: "Usuario",
     }
 );
+
+Usuario.sync();
 
 module.exports = Usuario;

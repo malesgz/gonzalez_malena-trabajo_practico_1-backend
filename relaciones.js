@@ -6,14 +6,11 @@ const app = require("./src/app.js");
 require("dotenv").config();
 const port = process.env.PORT;
 
-Usuario.belongsTo(Usuario, { as: "categoriaProducto" });
-Producto.hasMany(Producto, { as: "productosEnCategoria" });
+Usuario.hasMany(Producto, { foreignKey: "id_usuario", as: "producto" });
+Producto.belongsTo(Usuario, { foreignKey: "id_usuario", as: "usuario" });
 
-Comentario.hasMany(Comentario, {
-  foreignKey: "id_Comentario",
-  as: "comentario",
-});
-Producto.belongsTo(Producto, { foreignKey: "id_Producto", as: "producto" });
+Producto.hasMany(Comentario, { foreignKey: "id_producto", as: "comentario" });
+Comentario.belongsTo(Producto, { foreignKey: "id_producto", as: "producto" });
 
 sequelize.models = {
   Comentario,
@@ -22,11 +19,9 @@ sequelize.models = {
 };
 
 sequelize.sync({ force: false }).then(() => {
-  console.log("Tablas de comentario, producto y comentarios creadas");
+  console.log("Tablas de comentario, producto y comentarios fueron creadas");
   app.listen(port, () => {
-    console.log(
-      `Servidor se encuentra en ejecución en http://localhost:${port}`
-    );
+    console.log(`Servidor se encuentra en ejecución en http://localhost:${port}`);
   });
 });
 

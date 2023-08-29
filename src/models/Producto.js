@@ -3,8 +3,8 @@ const {DataTypes, sequelize } = require("../db");
 const Producto = sequelize.define("Producto", {
   id_Producto: {
     type: DataTypes.INTEGER,
-    autoIncrement: true,
     primaryKey: true,
+    autoIncrement: true,
     unique: true,
     allowNull: false,
   },
@@ -41,5 +41,7 @@ const Producto = sequelize.define("Producto", {
       deletedAt: true,
       tableName: "Producto",
     });
+
+Producto.sync();
 
 module.exports = Producto;

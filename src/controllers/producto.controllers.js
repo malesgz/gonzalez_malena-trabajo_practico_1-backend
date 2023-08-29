@@ -5,22 +5,24 @@ const Producto = require("../models/Producto");
 ProductoCtrl.createProducto = async (req, res) => {
   const { categoria, nombre, precio } = req.body;
   try {
-    const existeProducto = await Producto.findOne({
-      where: {
-        nombre,
-      },
-    });
-    if (existeProducto) {
-      throw {
-        status: 400,
-        message: "Este producto ya existe",
-      };
-    }
-    const nuevoProducto = nuevoProducto({
+    // const existeProducto = await Producto.findOne({
+    //   where: {
+    //     nombre,
+    //   },
+    // });
+    // if (existeProducto) {
+    //   throw {
+    //     status: 400,
+    //     message: "Este producto ya existe",
+    //   };
+    // }
+    const nuevoProducto = new Producto({
       categoria,
       nombre,
       precio,
     });
+    await nuevoProducto.save();
+    
     //Producto guardado.
     return res.status(201).json({
       message: "El producto fue guardado exitosamente",
